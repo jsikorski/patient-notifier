@@ -17,5 +17,5 @@ angular.module('patientNotifierApp')
           # Logged in, redirect to home
           $location.path '/'
         .catch (err) ->
-          err = err.data;
-          $scope.errors.other = err.message;
+          err = err.data
+          $scope.errors.other = err.message
