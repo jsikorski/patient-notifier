@@ -59,5 +59,6 @@
   },
   "scripts": {
     "test": "grunt test"
-  }
+  },
+  "private": true
 }
