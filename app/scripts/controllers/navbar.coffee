@@ -3,11 +3,11 @@
 angular.module('patientNotifierApp')
   .controller 'NavbarCtrl', ($scope, $location, Auth) ->
     $scope.menu = [
-      title: 'Home'
-      link: '/'
-    , 
-      title: 'Settings'
-      link: '/settings'
+    #   title: 'Home'
+    #   link: '/'
+    # , 
+    #   title: 'Settings'
+    #   link: '/settings'
     ]
     
     $scope.logout = ->
