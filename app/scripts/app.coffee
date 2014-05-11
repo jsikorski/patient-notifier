@@ -9,8 +9,8 @@ angular.module('patientNotifierApp', [
   .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: 'partials/main'
-        controller: 'MainCtrl'
+        templateUrl: 'partials/visits'
+        controller: 'VisitsCtrl'
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'

@@ -1,4 +1,4 @@
 'use strict'
 
 angular.module('patientNotifierApp')
-  .controller 'MainCtrl', ($scope) ->
+  .controller 'VisitsCtrl', ($scope) ->

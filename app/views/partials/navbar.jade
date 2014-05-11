@@ -1,7 +1,12 @@
-.header(ng-controller='NavbarCtrl')
-  ul.nav.nav-pills.pull-right
-    li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
-      a(ng-href='{{item.link}}') {{item.title}}
-    li(ng-show='currentUser', ng-class='{active: isActive("/logout")}')
-      a(href='', ng-click='logout()') Logout
-  h3.text-muted PatientNotifier
+.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
+	.container
+		.navbar-header
+			a.navbar-brand(href='#')
+				| PatientNotifier
+
+		.navbar-colapse
+			ul.nav.navbar-nav.navbar-right(ng-show='currentUser')
+				li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
+					a(ng-href='{{item.link}}') {{item.title}}
+				li(ng-class='{active: isActive("/logout")}')
+					a(href='', ng-click='logout()') Wyloguj			
