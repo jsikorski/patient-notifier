@@ -1,0 +1,14 @@
+h2 Pacjenci
+
+table.table.table-striped
+	thead
+		tr
+			th Imię
+			th Nazwisko
+			th Pesel
+
+	tbody
+		tr(ng-repeat='patient in patients')
+			td {{ patient.firstName }}
+			td {{ patient.lastName }}
+			td {{ patient.pesel }}
