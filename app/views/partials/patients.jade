@@ -8,9 +8,12 @@ table.table.table-striped
 			th Imię
 			th Nazwisko
 			th Pesel
+			th
 
 	tbody
-		tr(ng-repeat='patient in patients')
+		tr(ng-repeat='patient in patients', ng-controller='PatientCtrl')
 			td {{ patient.firstName }}
 			td {{ patient.lastName }}
 			td {{ patient.pesel }}
+			td
+				span.glyphicon.glyphicon-pencil(ng-click='openEditPatientModal()')
