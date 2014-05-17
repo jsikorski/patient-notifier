@@ -1,0 +1,15 @@
+div
+    button.btn.btn-primary.pull-right(ng-click='openAddUsersModal()') Dodaj użytkownika
+    h2 Użytkownicy
+table.table.table-striped
+    thead
+        tr
+            th Nazwa
+            th E-mail
+            th Rola
+    tbody
+        tr(ng-repeat='user in users', ng-controller='UsersCtrl')
+            td {{ user.name }}
+            td {{ user.email }}
+            td {{ user.role }}
+

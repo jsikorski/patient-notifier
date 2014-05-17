@@ -1,0 +1,20 @@
+form.form(name='form', ng-submit='submit(form)', novalidate)
+    .modal-header
+        button.close(type='button', data-dismiss='modal', ng-click='$dismiss()') &times;
+        h3.modal-title Dodaj użytkownika
+
+    .modal-body
+        .form-group.has-error
+            p.help-block {{ errors.other }}
+
+        .form-group(ng-class='{ "has-error": submitted && form.name.$invalid }')
+            input.form-control(type='text', placeholder='Nazwa', name='name', ng-model='user.name', required)
+            p.help-block(ng-show='submitted && form.name.$error.required') Pole nazwa jest wymagane.
+
+        .form-group(ng-class='{ "has-error": submitted && form.email.$invalid }')
+            input.form-control(type='text', placeholder='E-mail', name='email', ng-model='user.email', required)
+            p.help-block(ng-show='submitted && form.email.$error.required') Pole e-mail jest wymagane.
+
+
+    .modal-footer
+        button.btn.btn-primary(type='submit') Zapisz

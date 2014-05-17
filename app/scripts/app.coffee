@@ -15,6 +15,9 @@ angular.module('patientNotifierApp', [
       .when '/patients',
         templateUrl: 'partials/patients'
         controller: 'PatientsCtrl'
+      .when '/users',
+        templateUrl: 'partials/users'
+        controller: 'UsersCtrl'
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
