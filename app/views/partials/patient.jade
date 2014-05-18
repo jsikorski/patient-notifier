@@ -5,7 +5,7 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 
 	.modal-body
 		.form-group.has-error
-			p.help-block {{ errors.other }}
+			p.help-block {{ error }}
 
 		.form-group(ng-class='{ "has-error": submitted && form.firstName.$invalid }')
 			input.form-control(type='text', placeholder='Imię', name='firstName', ng-model='patient.firstName', required)

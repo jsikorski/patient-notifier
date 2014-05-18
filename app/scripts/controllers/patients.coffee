@@ -38,8 +38,14 @@ angular.module('patientNotifierApp')
 		$scope.submit = (form) ->
 			$scope.submitted = true
 			return if form.$invalid
-			$scope.patient.$save().then -> 
-				$scope.$close($scope.patient)
+			$scope.patient.$save()
+				.then -> 
+					$scope.$close($scope.patient)
+				.catch (err) ->
+					if err.data.code in [ 11000, 11001 ]
+						$scope.error = "Pacjent o podanym numerze pesel jest już zarejestrowany w systemie."
+					else
+						$scope.error = "Wystąpił nieznany błąd."
 
 
 angular.module('patientNotifierApp')
@@ -50,5 +56,12 @@ angular.module('patientNotifierApp')
 		$scope.submit = (form) ->
 			$scope.submitted = true
 			return if form.$invalid
-			$scope.patient.$update().then -> 
-				$scope.$close($scope.patient)
+			$scope.patient.$update()
+				.then -> 
+					$scope.$close($scope.patient)
+				.catch (err) ->
+					console.log(err)
+					if err.data.lastErrorObject.code in [ 11000, 11001 ]
+						$scope.error = "Pacjent o podanym numerze pesel jest już zarejestrowany w systemie."
+					else
+						$scope.error = "Wystąpił nieznany błąd."
