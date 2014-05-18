@@ -2,7 +2,7 @@
 
 
 angular.module('patientNotifierApp')
-.controller 'UsersCtrl', ($scope, User, $modal) ->
+.controller 'UsersCtrl', ($scope, User,$modal) ->
   $scope.users = User.query()
 
   $scope.openAddUserModal = ->

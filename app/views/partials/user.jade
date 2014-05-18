@@ -8,13 +8,19 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
             p.help-block {{ errors.other }}
 
         .form-group(ng-class='{ "has-error": submitted && form.name.$invalid }')
-            input.form-control(type='text', placeholder='Nazwa', name='name', ng-model='user.name', required)
+            input.form-control(type='text', placeholder='Nazwa', name='name', ng-model='user.name', required,
+                focus-when='true')
             p.help-block(ng-show='submitted && form.name.$error.required') Pole nazwa jest wymagane.
 
         .form-group(ng-class='{ "has-error": submitted && form.email.$invalid }')
             input.form-control(type='text', placeholder='E-mail', name='email', ng-model='user.email', required)
             p.help-block(ng-show='submitted && form.email.$error.required') Pole e-mail jest wymagane.
 
+        .form-group(ng-class='{ "has-error": submitted && form.role.$invalid }')
+            select.form-control(type='select', name='role', ng-model='user.role')
+                option(value='user', ng-selected='true') użytkownik
+                option(value='administrator') administrator
 
+        ta
     .modal-footer
         button.btn.btn-primary(type='submit') Zapisz

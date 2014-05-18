@@ -7,16 +7,16 @@ table.table.table-striped
             th Nazwa
             th E-mail
             th Rola
-            th Aktywny
+            th Status
     tbody
         tr(ng-repeat='user in users', ng-controller='UserCtrl')
             td {{ user.name }}
             td {{ user.email }}
-            td {{ user.role }}
-            td {{ user.active }}
+            td {{ user.role === 'administrator' ? 'administrator' : 'użytkownik'}}
+            td {{ user.active ? 'aktywny' : 'zablokowany' }}
             td
                 span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
             td
-                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()')
+                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-show='user.active')
             td
-                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()')
+                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-show='!user.active')
