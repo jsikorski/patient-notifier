@@ -3,14 +3,13 @@
 angular.module("patientNotifierApp")
   .factory "User", ($resource) ->
     $resource "/api/users/:id",
-      id: "@id"
+      id: "@_id"
     ,
       update:
-        method: "PUT"
+        method: "PATCH"
         params: {}
 
       get:
         method: "GET"
         params:
           id: "me"
-

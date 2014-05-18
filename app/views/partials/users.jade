@@ -1,5 +1,5 @@
 div
-    button.btn.btn-primary.pull-right(ng-click='openAddUsersModal()') Dodaj użytkownika
+    button.btn.btn-primary.pull-right(ng-click='openAddUserModal()') Dodaj użytkownika
     h2 Użytkownicy
 table.table.table-striped
     thead
@@ -7,9 +7,16 @@ table.table.table-striped
             th Nazwa
             th E-mail
             th Rola
+            th Aktywny
     tbody
-        tr(ng-repeat='user in users', ng-controller='UsersCtrl')
+        tr(ng-repeat='user in users', ng-controller='UserCtrl')
             td {{ user.name }}
             td {{ user.email }}
             td {{ user.role }}
-
+            td {{ user.active }}
+            td
+                span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
+            td
+                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()')
+            td
+                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()')
