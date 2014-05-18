@@ -22,6 +22,7 @@ html.no-js
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/form.css">
     <!-- endbuild -->
   body(ng-app="patientNotifierApp")
     //[if lt IE 7]>
@@ -55,9 +56,11 @@ html.no-js
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="bower_components/underscore.string/lib/underscore.string.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/visits.js"></script>
     <script src="scripts/controllers/navbar.js"></script>
@@ -70,6 +73,9 @@ html.no-js
     <script src="scripts/services/patient.js"></script>
     <script src="scripts/directives/mongooseError.js"></script>
     <script src="scripts/directives/pesel.js"></script>
+    <script src="scripts/directives/zipCode.js"></script>
+    <script src="scripts/filters/zipCode.js"></script>
+    <script src="scripts/filters/address.js"></script>
     <script src="scripts/controllers/patients.js"></script>
     <script src="scripts/controllers/users.js"></script>
     <!-- endbuild -->

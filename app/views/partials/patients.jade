@@ -8,6 +8,7 @@ table.table.table-striped
 			th Imię
 			th Nazwisko
 			th Pesel
+			th Adres
 			th
 
 	tbody
@@ -15,5 +16,6 @@ table.table.table-striped
 			td {{ patient.firstName }}
 			td {{ patient.lastName }}
 			td {{ patient.pesel }}
+			td {{ patient.address | address }}
 			td
 				span.glyphicon.glyphicon-pencil(ng-click='openEditPatientModal()')

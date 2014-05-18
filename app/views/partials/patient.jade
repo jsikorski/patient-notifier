@@ -20,5 +20,19 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 			p.help-block(ng-show='submitted && form.pesel.$error.required') Pole pesel jest wymagane.
 			p.help-block(ng-show='submitted && !form.pesel.$error.required && form.pesel.$error.pesel') Wprowadzony pesel nie jest prawidłowy.
 
+		.form-group-row
+			.form-group.col-3(ng-class='{ "has-error": submitted && form.zipCode.$invalid }')
+				input.form-control(type='text', placeholder='Kod pocztowy', name='zipCode', ng-model='patient.address.zipCode', required, zip-code)
+				p.help-block(ng-show='submitted && form.zipCode.$error.required') Pole kod pocztowy jest wymagane.
+				p.help-block(ng-show='submitted && !form.zipCode.$error.required && form.zipCode.$error.zipCode') Wprowadzony kod pocztowy nie jest prawidłowy.
+
+			.form-group.col-9(ng-class='{ "has-error": submitted && form.city.$invalid }')
+				input.form-control(type='text', placeholder='Miasto', name='city', ng-model='patient.address.city', required)
+				p.help-block(ng-show='submitted && form.city.$error.required') Pole miasto jest wymagane.
+
+		.form-group(ng-class='{ "has-error": submitted && form.street.$invalid }')
+			input.form-control(type='text', placeholder='Ulica', name='street', ng-model='patient.address.street', required)
+			p.help-block(ng-show='submitted && form.street.$error.required') Pole ulica jest wymagane.
+
 	.modal-footer
 		button.btn.btn-primary(type='submit') Zapisz
