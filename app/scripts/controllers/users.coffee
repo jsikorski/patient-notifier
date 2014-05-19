@@ -68,7 +68,7 @@ angular.module('patientNotifierApp')
         $scope.$close($scope.user)
       .catch (err) ->
         console.log(err)
-        if err.data.name == "ValidationError"
+        if err.data.code in [ 11000, 11001 ]
           $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
         else
           $scope.error = "Wystąpił nieznany błąd."
@@ -86,7 +86,7 @@ angular.module('patientNotifierApp')
         $scope.$close($scope.user)
       .catch (err) ->
         console.log(err)
-        if err.data.name == "ValidationError"
+        if err.data.lastErrorObject.code in [ 11000, 11001 ]
           $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
         else
           $scope.error = "Wystąpił nieznany błąd."
