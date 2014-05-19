@@ -8,7 +8,8 @@
       p.help-block {{ errors.other }}
 
     .form-group(ng-class='{ "has-error": submitted && form.email.$invalid }')
-      input.form-control(placeholder='Email' type='email', name='email', ng-model='user.email' required)
+      input.form-control(placeholder='Email' type='email', name='email', ng-model='user.email' required,
+        focus-when='true')
       p.help-block(ng-show='submitted && form.email.$error.required') Pole email jest wymagane.
       p.help-block(ng-show='submitted && !form.email.$error.required && form.email.$error.email') Wprowadzony adres email nie jest prawidłowy.
 
