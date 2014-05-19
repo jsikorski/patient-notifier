@@ -57,6 +57,7 @@ angular.module('patientNotifierApp')
 .controller 'AddUserCtrl', ($scope, User) ->
   $scope.title = 'Dodaj użytkownika'
   $scope.user = new User()
+  $scope.isNewUser = true
 
   $scope.submit = (form) ->
     $scope.submitted = true
@@ -69,6 +70,7 @@ angular.module('patientNotifierApp')
 .controller 'EditUserCtrl', ($scope, editedUser) ->
   $scope.title = 'Edytuj dane użytkownika'
   $scope.user = angular.copy(editedUser)
+  $scope.isNewUser = false
 
   $scope.submit = (form) ->
     $scope.submitted = true

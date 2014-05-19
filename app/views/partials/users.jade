@@ -16,7 +16,6 @@ table.table.table-striped
             td {{ user.active ? 'aktywny' : 'zablokowany' }}
             td
                 span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
-            td
-                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-show='user.active')
-            td
-                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-show='!user.active')
+            td(ng-switch='user.active')
+                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')
+                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-switch-when='false')
