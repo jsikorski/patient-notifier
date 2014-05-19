@@ -56,27 +56,40 @@ angular.module('patientNotifierApp')
 angular.module('patientNotifierApp')
 .controller 'AddUserCtrl', ($scope, User) ->
   $scope.title = 'Dodaj użytkownika'
-  $scope.user = new User()
-  $scope.isNewUser = true
+  $scope.user = new User({role: 'user'})
 
   $scope.submit = (form) ->
     $scope.submitted = true
     return if form.$invalid
-    $scope.user.$save().then ->
-      $scope.$close($scope.user)
-
+    $scope.user.$save()
+      .then ->
+        $scope.$close($scope.user)
+      .then ->
+        $scope.$close($scope.user)
+      .catch (err) ->
+        console.log(err)
+        if err.data.name == "ValidationError"
+          $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
+        else
+          $scope.error = "Wystąpił nieznany błąd."
 
 angular.module('patientNotifierApp')
 .controller 'EditUserCtrl', ($scope, editedUser) ->
   $scope.title = 'Edytuj dane użytkownika'
   $scope.user = angular.copy(editedUser)
-  $scope.isNewUser = false
 
   $scope.submit = (form) ->
     $scope.submitted = true
     return if form.$invalid
-    $scope.user.$update().then ->
-      $scope.$close($scope.user)
+    $scope.user.$update()
+      .then ->
+        $scope.$close($scope.user)
+      .catch (err) ->
+        console.log(err)
+        if err.data.name == "ValidationError"
+          $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
+        else
+          $scope.error = "Wystąpił nieznany błąd."
 
 
 angular.module('patientNotifierApp')
