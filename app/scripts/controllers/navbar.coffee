@@ -8,8 +8,15 @@ menu =
   administrator: [
     { title: 'Wizyty', link: '/' }
     { title: 'Pacjenci', link: '/patients' }
+    { title: 'Lekarze', link: '/doctors' }
     { title: 'Użytkownicy', link: '/users' }
+    { title: 'Ustawienia', link: '/settings' }
   ]
+
+  doctor: [
+      { title: 'Wizyty', link: '/' }
+      { title: 'Ustawienia', link: '/settings' }
+    ]
 
 
 angular.module('patientNotifierApp')

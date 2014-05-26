@@ -1,0 +1,19 @@
+div
+	button.btn.btn-primary.pull-right(ng-click='openAddDoctorModal()') Dodaj lekarza
+	h2 Lekarze
+table.table.table-striped
+	thead
+		tr
+			th Nazwisko
+			th Imię
+			th Specjalność
+			th ID
+	tbody
+		tr(ng-repeat='doctor in doctors', ng-controller='DoctorCtrl')
+			td {{ doctor.lastName }}
+			td {{ doctor.firstName }}
+			td(ng-show='doctor.speciality === "internist"') internista
+			td(ng-show='doctor.speciality === "pediatrician"') pediatra
+			td {{ doctor._id }}
+			td
+				span.glyphicon.glyphicon-pencil(ng-click='openEditDoctorModal()')

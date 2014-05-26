@@ -1,0 +1,25 @@
+form.form(name='form', ng-submit='submit(form)', novalidate)
+	.modal-header
+		button.close(type='button', data-dismiss='modal', ng-click='$dismiss()') &times;
+		h3.modal-title {{ title }}
+
+	.modal-body
+		.form-group.has-error
+			p.help-block {{ error }}
+
+		.form-group(ng-class='{ "has-error": submitted && form.firstName.$invalid }')
+			input.form-control(type='text', placeholder='Imię', name='firstName', ng-model='doctor.firstName', required, focus-when='true')
+			p.help-block(ng-show='submitted && form.firstName.$error.required') Pole imię jest wymagane.
+
+		.form-group(ng-class='{ "has-error": submitted && form.lastName.$invalid }')
+			input.form-control(type='text', placeholder='Nazwisko', name='lastName', ng-model='doctor.lastName', required)
+			p.help-block(ng-show='submitted && form.lastName.$error.required') Pole nazwisko jest wymagane.
+
+		.form-group(ng-class='{ "has-error": submitted && form.role.$invalid }')
+			select.form-control(type='select', name='speciality', ng-model='doctor.speciality')
+				option(value='internist') internista
+				option(value='pediatrician') pediatra
+
+
+	.modal-footer
+		button.btn.btn-primary(type='submit') Zapisz
