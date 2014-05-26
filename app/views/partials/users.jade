@@ -1,21 +1,29 @@
 div
-    button.btn.btn-primary.pull-right(ng-click='openAddUserModal()') Dodaj użytkownika
-    h2 Użytkownicy
+	button.btn.btn-primary.pull-right(ng-click='openAddUserModal()') Dodaj użytkownika
+	h2 Użytkownicy
 table.table.table-striped
-    thead
-        tr
-            th Nazwa
-            th E-mail
-            th Rola
-            th Status
-    tbody
-        tr(ng-repeat='user in users', ng-controller='UserCtrl')
-            td {{ user.name }}
-            td {{ user.email }}
-            td {{ user.role === 'administrator' ? 'administrator' : 'użytkownik'}}
-            td {{ user.active ? 'aktywny' : 'zablokowany' }}
-            td
-                span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
-            td(ng-switch='user.active')
-                span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')
-                span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-switch-when='false')
+	thead
+		tr
+			th Nazwa
+			th E-mail
+			th Rola
+			th Status
+			th Powiązani
+			th ID
+	tbody
+		tr(ng-repeat='user in users', ng-controller='UserCtrl')
+			td {{ user.name }}
+			td {{ user.email }}
+			td(ng-show='user.role === "administrator"') administrator
+			td(ng-show='user.role === "doctor"') doktor
+			td(ng-show='user.role === "user"') użytkownik
+			td {{ user.active ? 'aktywny' : 'zablokowany' }}
+			td {{ user.related}}
+			td {{ user._id}}
+			td
+				span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
+			td(ng-switch='user.active')
+				span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')
+				span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-switch-when='false')
+			td
+				span.glyphicon.glyphicon-user(ng-click='openUsersPatientsModal()', ng-show='user.role === "doctor"')

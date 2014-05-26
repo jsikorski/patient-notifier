@@ -5,17 +5,18 @@ div
 table.table.table-striped
 	thead
 		tr
-			th Imię
 			th Nazwisko
+			th Imię
 			th Pesel
 			th Adres
-			th
+			th ID
 
 	tbody
 		tr(ng-repeat='patient in patients', ng-controller='PatientCtrl')
-			td {{ patient.firstName }}
 			td {{ patient.lastName }}
+			td {{ patient.firstName }}
 			td {{ patient.pesel }}
 			td {{ patient.address | address }}
+			td {{ patient._id}}
 			td
 				span.glyphicon.glyphicon-pencil(ng-click='openEditPatientModal()')
