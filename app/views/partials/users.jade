@@ -26,4 +26,5 @@ table.table.table-striped
 				span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')
 				span.glyphicon.glyphicon-check(ng-click='openUnblockUserModal()', ng-switch-when='false')
 			td
-				span.glyphicon.glyphicon-user(ng-click='openUsersPatientsModal()', ng-show='user.role === "doctor"')
+				span.glyphicon.glyphicon-user(ng-click='openUserRelatedModal()',
+					ng-show='user.role === "doctor" || user.role === "user"')
