@@ -4,6 +4,7 @@
 angular.module('patientNotifierApp')
   .controller 'DoctorsCtrl', ($scope, Doctor, $modal) ->
     $scope.doctors = Doctor.query()
+    $scope.specialities = ['internist', 'pediatrician']
 
     $scope.openAddDoctorModal = ->
       modal = $modal.open

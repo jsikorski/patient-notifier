@@ -7,13 +7,10 @@ table.table.table-striped
 			th Nazwisko
 			th Imię
 			th Specjalność
-			th ID
 	tbody
 		tr(ng-repeat='doctor in doctors', ng-controller='DoctorCtrl')
 			td {{ doctor.lastName }}
 			td {{ doctor.firstName }}
-			td(ng-show='doctor.speciality === "internist"') internista
-			td(ng-show='doctor.speciality === "pediatrician"') pediatra
-			td {{ doctor._id }}
+			td {{ doctor.speciality | speciality }}
 			td
 				span.glyphicon.glyphicon-pencil(ng-click='openEditDoctorModal()')

@@ -1,0 +1,36 @@
+div
+	h3.modal-title Przypisani do {{ related.user.name }}
+div(ng-show="related.user.role==='doctor'")
+	button.btn.btn-primary.pull-right(ng-click='openAddRelatedDoctorModal()') Przypisz lekarza
+	table.table.table-striped(ng-controller='RelatedDoctorCtrl')
+		thead
+			tr
+				th Nazwisko
+				th Imię
+		tbody
+			tr(ng-repeat='doctor in related.doctors')
+				td {{ doctor.lastName }}
+				td {{ doctor.firstName }}
+				td {{ doctor.speciality | speciality }}
+				td
+					span.glyphicon.glyphicon-remove(ng-click='openRemoveRelatedDoctorModal()')
+div(ng-show="related.user.role==='user'")
+	button.btn.btn-primary.pull-right(ng-click='openAddRelatedPatientModal()') Przypisz pacjenta
+	table.table.table-striped(ng-controller='RelatedPatientCtrl')
+		thead
+			tr
+				th Nazwisko
+				th Imię
+				th Pesel
+				th Adres
+		tbody
+			tr(ng-repeat='patient in related.patients')
+				td {{ patient.lastName }}
+				td {{ patient.firstName }}
+				td {{ patient.pesel }}
+				td {{ patient.address | address }}
+				td
+					span.glyphicon.glyphicon-remove(ng-click='openRemoveRelatedPatientModal()')
+
+
+
