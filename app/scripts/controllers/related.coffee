@@ -97,6 +97,7 @@ angular.module('patientNotifierApp')
 
 angular.module('patientNotifierApp')
 .controller 'RemoveRelatedDoctorCtrl', ($scope, editedUser, removedDoctor) ->
+
   $scope.user = angular.copy(editedUser)
   $scope.removedDoctor = removedDoctor
   console.log $scope.removedDoctor
