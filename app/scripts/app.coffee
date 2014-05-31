@@ -19,7 +19,7 @@ angular.module('patientNotifierApp', [
       .when '/doctors',
         templateUrl: 'partials/doctors'
         controller: 'DoctorsCtrl'
-      .when '/users/',
+      .when '/users',
           templateUrl: 'partials/users'
           controller: 'UsersCtrl'
       .when '/users/:id/related',
