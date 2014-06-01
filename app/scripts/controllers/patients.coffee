@@ -60,7 +60,6 @@ angular.module('patientNotifierApp')
 				.then -> 
 					$scope.$close($scope.patient)
 				.catch (err) ->
-					console.log(err)
 					if err.data.lastErrorObject.code in [ 11000, 11001 ]
 						$scope.error = "Pacjent o podanym numerze pesel jest już zarejestrowany w systemie."
 					else
