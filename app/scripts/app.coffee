@@ -6,7 +6,8 @@ angular.module('patientNotifierApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'ui.calendar'
+  'ui.calendar',
+  'ui.bootstrap.datetimepicker'
 ])
   .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider

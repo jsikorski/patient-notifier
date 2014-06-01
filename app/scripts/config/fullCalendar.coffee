@@ -26,3 +26,6 @@ angular.module('patientNotifierApp').value 'fullCalendarConfig',
 	minTime: 0
 	maxTime: 24
 	axisFormat: 'HH:mm'
+	allDayDefault: false
+	defaultView: 'agendaWeek'
+	unselectAuto: false

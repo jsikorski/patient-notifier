@@ -17,6 +17,7 @@ html.no-js
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -62,6 +63,8 @@ html.no-js
     <script src="bower_components/fullcalendar/fullcalendar.js"></script>
     <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
     <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -78,12 +81,13 @@ html.no-js
     <script src="scripts/services/session.js"></script>
     <script src="scripts/services/user.js"></script>
     <script src="scripts/services/patient.js"></script>
-    <script  src="scripts/services/doctor.js"></script>
-    <script src="scripts/services/related.js"></script>
+    <script src="scripts/services/doctor.js"></script>
+    <script src="scripts/services/visit.js"></script>
     <script src="scripts/directives/mongooseError.js"></script>
     <script src="scripts/directives/pesel.js"></script>
     <script src="scripts/directives/zipCode.js"></script>
     <script src="scripts/directives/focusWhen.js"></script>
+    <script src="scripts/directives/latterThan.js"></script>
     <script src="scripts/filters/zipCode.js"></script>
     <script src="scripts/filters/address.js"></script>
     <script src="scripts/filters/speciality.js"></script>

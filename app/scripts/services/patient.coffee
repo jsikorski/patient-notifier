@@ -1,8 +1,8 @@
 "use strict"
 
 angular.module('patientNotifierApp')
-	.factory 'Patient', ($resource) ->
-		$resource '/api/patients/:id', 
+	.factory 'Patient', ($resource, $filter) ->
+		Patient = $resource '/api/patients/:id', 
 			{ 
 				id: '@_id' 
 			},
@@ -10,3 +10,9 @@ angular.module('patientNotifierApp')
 				update:
 					method: 'PATCH'
 			}
+
+		Patient::getDisplayName = ->
+			return '' unless @_id?
+			"#{@firstName} #{@lastName}, #{$filter('address')(@address)}"
+
+		return Patient

@@ -1,0 +1,35 @@
+form.form(name='form', ng-submit='submit(form)', novalidate)
+	.modal-header
+		button.close(type='button', data-dismiss='modal', ng-click='$dismiss()') &times;
+		h3.modal-title {{ title }}
+
+	.modal-body
+		.form-group.has-error
+			p.help-block {{ error }}
+
+		.form-group(ng-class='{ "has-error": submitted && form.end.$invalid}')
+			datetimepicker.pull-left(name='start', ng-model='visit.start', datetimepicker-config="{'startView': 'minute'}")
+			datetimepicker.pull-right(name='end', ng-model='visit.end', datetimepicker-config="{'startView': 'minute'}", latter-than='{{visit.start}}')
+			.clearfix
+			p.help-block(ng-show='submitted && form.end.$error.latterThan') Data rozpoczęcia wizyty musi być wcześniejsza niż data jej zakończenia.
+
+		.form-group(ng-class='{ "has-error": submitted && form.doctor.$invalid }')
+			select.form-control(
+				name='doctor',
+				ng-model='visit.doctor', 
+				ng-options="doctor._id as doctor.getDisplayName() for doctor in doctors | orderBy:['lastName', 'firstName']",
+				required)
+					option(value= '') -- lekarz --
+			p.help-block(ng-show='submitted && form.doctor.$error.required') Pole lekarz jest wymagane.
+
+		.form-group(ng-class='{ "has-error": submitted && form.patient.$invalid }')
+			select.form-control(
+				name='patient',
+				ng-model='visit.patient', 
+				ng-options="patient._id as patient.getDisplayName() for patient in patients | orderBy:['lastName', 'firstName']",
+				required)
+					option(value= '') -- pacjent --
+			p.help-block(ng-show='submitted && form.patient.$error.required') Pole pacjent jest wymagane.
+
+	.modal-footer
+		button.btn.btn-primary(type='submit') Zapisz
