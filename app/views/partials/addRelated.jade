@@ -4,24 +4,40 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 		h3.modal-title {{ title }}
 
 	.modal-body
-		.form-group.has-error
-			p.help-block {{ error }}
-
-		.form-group(ng-class='{ "has-error": submitted && form.name.$invalid }')
-			input.form-control(type='text', placeholder='Nazwa', name='name', ng-model='user.name', required,
-			focus-when='true')
-			p.help-block(ng-show='submitted && form.name.$error.required') Pole nazwa jest wymagane.
-
-		.form-group(ng-class='{ "has-error": submitted && form.email.$invalid }')
-			input.form-control(type='text', placeholder='E-mail', name='email', ng-model='user.email', required,
-			mongooseError='')
-			p.help-block(ng-show='submitted && form.email.$error.required') Pole e-mail jest wymagane.
-
-		.form-group(ng-class='{ "has-error": submitted && form.role.$invalid }')
-			select.form-control(type='select', name='role', ng-model='user.role')
-				option(value='user') użytkownik
-				option(value='administrator') administrator
-				option(value='doctor') lekarz
+		div(ng-show="user.role==='doctor'")
+			table.table.table-striped
+				thead
+					tr
+						th
+						th Nazwisko
+						th Imię
+						th Specjalność
+				tbody
+					tr(ng-repeat='(key, value) in selectedDoctors')
+						td
+							input(type='checkbox', ng-model='value.checked')
+						td {{ value.related.lastName }}
+						td {{ value.related.firstName }}
+						td {{ value.related.speciality | speciality }}
+						td {{ value.checked }}
+		div(ng-show="user.role==='user'")
+			table.table.table-striped
+				thead
+					tr
+						th
+						th Nazwisko
+						th Imię
+						th Pesel
+						th Adres
+				tbody
+					tr(ng-repeat='(key, value) in selectedPatients')
+						td
+							input(type='checkbox', ng-model='value.checked')
+						td {{ value.related.lastName }}
+						td {{ value.related.firstName }}
+						td {{ value.related.pesel }}
+						td {{ value.related.address | address }}
+						td {{ value.checked }}
 
 	.modal-footer
 		button.btn.btn-primary(type='submit') Zapisz
