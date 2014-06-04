@@ -1,6 +1,6 @@
 angular.module('patientNotifierApp')
 	.factory 'Visit', ($resource) ->
-		$resource '/api/visits/:id', 
+		Visit = $resource '/api/visits/:id', 
 			{ 
 				id: '@_id' 
 			},
@@ -13,3 +13,6 @@ angular.module('patientNotifierApp')
 				update:
 					method: 'PATCH'
 			}
+
+		Visit.defaultFields = ['_id', 'title', 'start', 'end', 'color', 'doctor', 'patient']
+		return Visit

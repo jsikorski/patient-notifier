@@ -28,13 +28,35 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, Visit) ->
 		modal.result.finally ->
 			$scope.calendar.fullCalendar('unselect')
 
+	$scope.openEditVisitModal = (visit) ->
+		modal = $modal.open
+			templateUrl: 'partials/visit'
+			controller: 'EditVisitCtrl'
+			resolve:
+				editedVisit: -> visit
+
+		update = (updatedVisit) ->
+			visit = _.find($scope.visits, _id: updatedVisit._id)
+			angular.extend(visit, asEvent(updatedVisit))
+
+		revertFunc = arguments[3] if _.isFunction(arguments[3])
+		revertFunc = arguments[4] if _.isFunction(arguments[4])
+		revert = ->	revertFunc() if revertFunc?
+
+		modal.result.then(update, revert)
+		modal.result.finally(->	$scope.calendar.fullCalendar('unselect'))
+
 
 	isAdmin = $scope.currentUser.role is 'administrator'
+	$scope.eventSignature = (event) -> event.color
 	$scope.calendarConfig = _.extend fullCalendarConfig,
 		editable: isAdmin
 		selectable: isAdmin
 		selectHelper: isAdmin
 		select: $scope.openAddVisitModal
+		eventClick: $scope.openEditVisitModal
+		eventDrop: $scope.openEditVisitModal
+		eventResize: $scope.openEditVisitModal
 		viewRender: (view) ->
 			visits = Visit.queryFiltered({start: view.visStart, end: view.visEnd})
 			visits.$promise.then -> 
@@ -56,6 +78,26 @@ module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) -
 				$scope.$close($scope.visit)
 			.catch (err) ->
 				if err.data.code is 'overlapping_visit'
-					$scope.error = "Lekarz ma już umówioną wizytę w tym terminie."
+					$scope.error = 'Lekarz ma już umówioną wizytę w tym terminie.'
 				else
-					$scope.error = "Wystąpił nieznany błąd."
+					$scope.error = 'Wystąpił nieznany błąd.'
+
+
+module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor) ->
+	$scope.title = 'Edytuj wizytę'
+	$scope.visit = new Visit(_.pick(editedVisit, Visit.defaultFields))
+	$scope.visit.patient = $scope.visit.patient._id
+	$scope.visit.doctor = $scope.visit.doctor._id
+	$scope.patients = Patient.query()
+	$scope.doctors = Doctor.query()
+
+	$scope.submit = (form) ->
+		$scope.submitted = true
+		return if form.$invalid
+		$scope.visit.$update()
+			.then($scope.$close)
+			.catch (err) ->
+				if err.data.code is 'overlapping_visit'
+					$scope.error = 'Lekarz ma już umówioną wizytę w tym terminie.'
+				else
+					$scope.error = 'Wystąpił nieznany błąd.'

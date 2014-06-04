@@ -14,7 +14,7 @@
     "angular-bootstrap": "~0.11.0",
     "lodash": "~2.4.1",
     "underscore.string": "~2.3.3",
-    "angular-ui-calendar": "~0.8.1",
+    "angular-ui-calendar": "git@github.com:jsikorski/ui-calendar.git#master",
     "momentjs": "~2.6.0",
     "angular-bootstrap-datetimepicker": "~0.2.2"
   },
