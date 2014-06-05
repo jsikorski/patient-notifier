@@ -9,6 +9,13 @@ asEvent = (visit) ->
 		end: new Date(visit.end)
 		color: visit.doctor.color
 
+errorHandler = ($scope) ->
+	(err) ->
+		if err.data.code is 'overlapping_visit'
+			$scope.error = 'Lekarz ma już umówioną wizytę w tym terminie.'
+		else
+			$scope.error = 'Wystąpił nieznany błąd.'
+
 
 module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, Visit) ->
 	$scope.visits = []
@@ -74,13 +81,8 @@ module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) -
 		$scope.submitted = true
 		return if form.$invalid
 		$scope.visit.$save()
-			.then -> 
-				$scope.$close($scope.visit)
-			.catch (err) ->
-				if err.data.code is 'overlapping_visit'
-					$scope.error = 'Lekarz ma już umówioną wizytę w tym terminie.'
-				else
-					$scope.error = 'Wystąpił nieznany błąd.'
+			.then(-> $scope.$close($scope.visit))
+			.catch(errorHandler($scope))
 
 
 module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor) ->
@@ -96,8 +98,4 @@ module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor)
 		return if form.$invalid
 		$scope.visit.$update()
 			.then($scope.$close)
-			.catch (err) ->
-				if err.data.code is 'overlapping_visit'
-					$scope.error = 'Lekarz ma już umówioną wizytę w tym terminie.'
-				else
-					$scope.error = 'Wystąpił nieznany błąd.'
+			.catch(errorHandler($scope))
