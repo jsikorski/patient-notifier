@@ -13,13 +13,18 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 						th Imię
 						th Specjalność
 				tbody
-					tr(ng-repeat='(key, value) in selectedDoctors')
-						td
-							input(type='checkbox', ng-model='value.checked')
-						td {{ value.related.lastName }}
-						td {{ value.related.firstName }}
-						td {{ value.related.speciality | speciality }}
-						td {{ value.checked }}
+					label
+						tr(ng-repeat='(key, value) in selectedDoctors')
+								td
+									input(type='checkbox', ng-model='value.checked', id='{{ key }}')
+									td
+										label(for='{{ key }}') {{ value.related.lastName }}
+									td
+										label(for='{{ key }}') {{ value.related.firstName }}
+									td
+										label(for='{{ key }}') {{ value.related.speciality | speciality }}
+									td
+										label(for='{{ key }}') {{ value.checked }}
 		div(ng-show="user.role==='user'")
 			table.table.table-striped
 				thead
@@ -32,12 +37,17 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 				tbody
 					tr(ng-repeat='(key, value) in selectedPatients')
 						td
-							input(type='checkbox', ng-model='value.checked')
-						td {{ value.related.lastName }}
-						td {{ value.related.firstName }}
-						td {{ value.related.pesel }}
-						td {{ value.related.address | address }}
-						td {{ value.checked }}
+							input(type='checkbox', ng-model='value.checked', id='{{ key }}')
+						td
+							label(for='{{ key }}') {{ value.related.lastName }}
+						td
+							label(for='{{ key }}') {{ value.related.firstName }}
+						td
+							label(for='{{ key }}') {{ value.related.pesel }}
+						td
+							label(for='{{ key }}') {{ value.related.address | address }}
+						td
+							label(for='{{ key }}') {{ value.checked }}
 
 	.modal-footer
 		button.btn.btn-primary(type='submit') Zapisz

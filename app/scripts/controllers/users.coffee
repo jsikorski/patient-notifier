@@ -59,7 +59,7 @@ angular.module('patientNotifierApp')
 
 
 angular.module('patientNotifierApp')
-  .controller 'AddUserCtrl', ($scope, User) ->
+  .controller 'AddUserCtrl', ($scope, User, Mailer) ->
     $scope.title = 'Dodaj użytkownika'
     $scope.user = new User({role: 'user'})
 
@@ -67,6 +67,8 @@ angular.module('patientNotifierApp')
       $scope.submitted = true
       return if form.$invalid
       $scope.user.$save()
+        .then ->
+          Mailer.sendActivationMail($scope.user)
         .then ->
           $scope.$close($scope.user)
         .catch (err) ->
