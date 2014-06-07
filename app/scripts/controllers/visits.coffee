@@ -19,9 +19,9 @@ errorHandler = ($scope) ->
 			$scope.error = 'Wystąpił nieznany błąd.'
 
 
-module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $notify, Visit) ->
-	$scope.visits = []
-	$scope.eventsSource = [ $scope.visits ]
+module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $notify, VisitEventsCollection) ->
+	events = new VisitEventsCollection()
+	$scope.eventsSource = [ events.models ]
 
 
 	$scope.openAddVisitModal = (start, end) ->
@@ -32,11 +32,10 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 				start: -> start
 				end: -> end
 
-		modal.result.then (visit) ->
-			$scope.visits.push(asEvent(visit))
-
-		modal.result.finally ->
-			$scope.calendar.fullCalendar('unselect')
+		modal.result
+			.then(events.add)
+			.finally ->
+				$scope.calendar.fullCalendar('unselect')
 
 
 	$scope.openEditVisitModal = (visit) ->
@@ -46,28 +45,23 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 			resolve:
 				editedVisit: -> visit
 
-		update = (updatedVisit) ->
-			visit = _.find($scope.visits, _id: updatedVisit._id)
-			angular.extend(visit, asEvent(updatedVisit))
-
 		revertFunc = arguments[3] if _.isFunction(arguments[3])
 		revertFunc = arguments[4] if _.isFunction(arguments[4])
 		revert = ->	revertFunc() if revertFunc?
 		revertOrCancel = (reason) ->
-			return revert unless reason is 'cancel-visit'
+			return revert() unless reason is 'cancel-visit'
 			
 			deleteVisit = ->
-				removeVisit = -> $scope.visits.splice($scope.visits.indexOf(visit), 1)
 				visit.$delete()
-					.then(removeVisit)
+					.then(-> events.remove(visit))
 					.catch (err) -> 
-						return removeVisit() if err.status is 404
+						return events.remove(visit) if err.status is 404
 						$notify.error("Wystąpił nieznany błąd.")
 						revert()
 
 			$confirm(cancelVisitMessage).then(deleteVisit, revert)
 
-		modal.result.then(update, revertOrCancel)
+		modal.result.then(events.update, revertOrCancel)
 		modal.result.finally(->	$scope.calendar.fullCalendar('unselect'))
 
 
@@ -81,11 +75,7 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 		eventClick: $scope.openEditVisitModal
 		eventDrop: $scope.openEditVisitModal
 		eventResize: $scope.openEditVisitModal
-		viewRender: (view) ->
-			visits = Visit.queryFiltered({start: view.visStart, end: view.visEnd})
-			visits.$promise.then -> 
-				_.each visits, (visit) -> 
-					$scope.visits.push(asEvent(visit)) unless _.find($scope.visits, _id: visit._id)?
+		viewRender: (view) -> events.query(view.visStart, view.visEnd)
 
 	
 module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) ->
