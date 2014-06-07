@@ -16,7 +16,8 @@
     "underscore.string": "~2.3.3",
     "angular-ui-calendar": "git@github.com:jsikorski/ui-calendar.git#master",
     "momentjs": "~2.6.0",
-    "angular-bootstrap-datetimepicker": "~0.2.2"
+    "angular-bootstrap-datetimepicker": "~0.2.2",
+    "remarkable-bootstrap-growl": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",

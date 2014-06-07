@@ -2,6 +2,8 @@
 
 module = angular.module('patientNotifierApp')
 
+cancelVisitMessage = 'Czy na pewno chcesz odwołać tę wizytę?'
+
 asEvent = (visit) ->
 	angular.extend visit, 
 		title: "#{visit.patient.lastName} #{visit.patient.firstName}"
@@ -17,10 +19,11 @@ errorHandler = ($scope) ->
 			$scope.error = 'Wystąpił nieznany błąd.'
 
 
-module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, Visit) ->
+module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $notify, Visit) ->
 	$scope.visits = []
 	$scope.eventsSource = [ $scope.visits ]
-	
+
+
 	$scope.openAddVisitModal = (start, end) ->
 		modal = $modal.open
 			templateUrl: 'partials/visit'
@@ -34,6 +37,7 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, Visit) ->
 
 		modal.result.finally ->
 			$scope.calendar.fullCalendar('unselect')
+
 
 	$scope.openEditVisitModal = (visit) ->
 		modal = $modal.open
@@ -49,8 +53,21 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, Visit) ->
 		revertFunc = arguments[3] if _.isFunction(arguments[3])
 		revertFunc = arguments[4] if _.isFunction(arguments[4])
 		revert = ->	revertFunc() if revertFunc?
+		revertOrCancel = (reason) ->
+			return revert unless reason is 'cancel-visit'
+			
+			deleteVisit = ->
+				removeVisit = -> $scope.visits.splice($scope.visits.indexOf(visit), 1)
+				visit.$delete()
+					.then(removeVisit)
+					.catch (err) -> 
+						return removeVisit() if err.status is 404
+						$notify.error("Wystąpił nieznany błąd.")
+						revert()
 
-		modal.result.then(update, revert)
+			$confirm(cancelVisitMessage).then(deleteVisit, revert)
+
+		modal.result.then(update, revertOrCancel)
 		modal.result.finally(->	$scope.calendar.fullCalendar('unselect'))
 
 
@@ -76,6 +93,7 @@ module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) -
 	$scope.visit = new Visit({start, end})
 	$scope.patients = Patient.query()
 	$scope.doctors = Doctor.query()
+	$scope.mode = 'add'
 
 	$scope.submit = (form) ->
 		$scope.submitted = true
@@ -92,6 +110,7 @@ module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor)
 	$scope.visit.doctor = $scope.visit.doctor._id
 	$scope.patients = Patient.query()
 	$scope.doctors = Doctor.query()
+	$scope.mode = 'edit'
 
 	$scope.submit = (form) ->
 		$scope.submitted = true

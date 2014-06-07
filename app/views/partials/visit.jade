@@ -32,4 +32,5 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 			p.help-block(ng-show='submitted && form.patient.$error.required') Pole pacjent jest wymagane.
 
 	.modal-footer
+		button.btn.btn-default(type='button', ng-show='mode === "edit"', ng-click='$dismiss("cancel-visit")') Odwołaj
 		button.btn.btn-primary(type='submit') Zapisz
