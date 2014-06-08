@@ -65,6 +65,18 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 		modal.result.finally(->	$scope.calendar.fullCalendar('unselect'))
 
 
+	$scope.openFilterVisitsModal = ->
+		modal = $modal.open
+			templateUrl: 'partials/filterDoctors'
+			controller: 'FilterDoctorsCtrl'
+			resolve:
+				doctorIds: -> events.doctorIds
+
+		modal.result.then (doctorIds) -> 
+			events.setFilters(doctorIds)
+			events.query(reset: true)
+
+
 	isAdmin = $scope.currentUser.role is 'administrator'
 	$scope.eventSignature = (event) -> event.color
 	$scope.calendarConfig = _.extend fullCalendarConfig,
@@ -75,7 +87,9 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 		eventClick: $scope.openEditVisitModal
 		eventDrop: $scope.openEditVisitModal
 		eventResize: $scope.openEditVisitModal
-		viewRender: (view) -> events.query(view.visStart, view.visEnd)
+		viewRender: (view) -> 
+			events.setRange(view.visStart, view.visEnd)
+			events.query()
 
 	
 module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) ->
@@ -108,3 +122,21 @@ module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor)
 		$scope.visit.$update()
 			.then($scope.$close)
 			.catch(errorHandler($scope))
+
+
+module.controller 'FilterDoctorsCtrl', ($scope, Doctor, doctorIds) ->
+	$scope.doctors = Doctor.query()
+	$scope.doctors.$promise.then ->
+		# console.log doctorIds
+		console.log $scope.doctors.length
+		_.each $scope.doctors, (doctor) ->
+			console.log "AAA"
+			console.log _.contains(doctorIds, doctor._id)
+			doctor.isSelected = !doctorIds or _.contains(doctorIds, doctor._id)
+			return true
+
+	$scope.submit = (form) ->
+		doctorIds = _.pluck(_.filter($scope.doctors, { isSelected: true }), '_id')
+		result = if doctorIds.length == $scope.doctors.length then null else doctorIds
+		console.log result
+		$scope.$close(result)

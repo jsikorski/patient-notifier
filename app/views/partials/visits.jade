@@ -1,1 +1,12 @@
 div(ui-calendar='calendarConfig', ng-model='eventsSource', calendar='calendar', calendar-watch-event='eventSignature')
+
+append-html(selector = '.fc-header-right', method = 'prepend')
+	button.fc-button.fc-state-default.fc-corner-left.fc-corner-right(ng-click='openFilterVisitsModal()') 
+		| filtruj lekarzy
+	span.fc-header-space
+
+	button.fc-button.fc-state-default.fc-corner-left.fc-corner-right(ng-click='openFilterVisitsModal()') 
+		| filtruj pacjentów
+	span.fc-header-space
+
+	span.fc-header-space
