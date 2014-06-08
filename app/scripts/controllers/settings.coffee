@@ -15,17 +15,13 @@ angular.module('patientNotifierApp')
 					form.password.$setValidity 'mongoose', false
 					$scope.errors.other = 'Incorrect password'
 
-		console.log $scope.currentUser
-
 		$scope.$watch 'currentUser.notificationChannels', ((oldValue, newValue) ->
-			# console.log _.
-			console.log arguments
-			console.log $scope.currentUser.notificationChannels
+			return if oldValue is newValue
 
 			$http(
 				method: 'PATCH'
 				url: "/api/users/#{$scope.currentUser._id}/notificationChannels",
 				data: { notificationChannels: $scope.currentUser.notificationChannels })
-				.success((channels) -> $scope.currentUser.notificationChannels = channels)
-				.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))
+					.success((channels) -> $scope.currentUser.notificationChannels = channels)
+					.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))
 			), true
