@@ -59,7 +59,7 @@ angular.module('patientNotifierApp')
 
 
 angular.module('patientNotifierApp')
-  .controller 'AddUserCtrl', ($scope, User, Mailer) ->
+  .controller 'AddUserCtrl', ($scope, User) ->
     $scope.title = 'Dodaj użytkownika'
     $scope.user = new User({role: 'user'})
 
@@ -68,12 +68,10 @@ angular.module('patientNotifierApp')
       return if form.$invalid
       $scope.user.$save()
         .then ->
-          Mailer.sendActivationMail($scope.user)
-        .then ->
           $scope.$close($scope.user)
         .catch (err) ->
           if err.data.code in [ 11000, 11001 ]
-            $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
+            $scope.error = "Użytkownik o podanym adresie e-mail lub numerze telefonu jest już zarejestrowany w systemie."
           else
             $scope.error = "Wystąpił nieznany błąd."
 

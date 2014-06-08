@@ -17,6 +17,10 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
                 mongooseError='')
             p.help-block(ng-show='submitted && form.email.$error.required') Pole e-mail jest wymagane.
 
+        .form-group(ng-class='{ "has-error": submitted && form.phoneNumber.$invalid }')
+            input.form-control(type='text', placeholder='Numer telefonu', name='phoneNumber', ng-model='user.phoneNumber', required, phoneNumber)
+            p.help-block(ng-show='submitted && form.phoneNumber.$error.required') Pole numer telefonu jest wymagane.
+
         .form-group(ng-class='{ "has-error": submitted && form.role.$invalid }')
             select.form-control(type='select', name='roleSelect', ng-model='user.role')
                 option(ng-repeat='role in roles', value='{{ role }}') {{ role | role }}

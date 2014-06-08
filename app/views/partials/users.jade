@@ -6,15 +6,16 @@ table.table.table-striped
 		tr
 			th Nazwa
 			th E-mail
+			th Numer telefonu
 			th Rola
 			th Status
 	tbody
 		tr(ng-repeat='user in users', ng-controller='UserCtrl')
 			td {{ user.name }}
 			td {{ user.email }}
+			td {{ user.phoneNumber }}
 			td {{ user.role | role }}
 			td {{ user.active ? 'aktywny' : 'zablokowany' }}
-			td {{ user._id }}
 				span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
 			td(ng-switch='user.active')
 				span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')
