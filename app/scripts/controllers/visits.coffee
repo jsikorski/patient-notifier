@@ -39,6 +39,8 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 
 
 	$scope.openEditVisitModal = (visit) ->
+		return unless $scope.currentUser.role is 'administrator'
+
 		modal = $modal.open
 			templateUrl: 'partials/visit'
 			controller: 'EditVisitCtrl'

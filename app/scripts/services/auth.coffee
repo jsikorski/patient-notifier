@@ -20,6 +20,7 @@ angular.module('patientNotifierApp')
         email: user.email
         password: user.password
       , (user) ->
+        console.log user
         $rootScope.currentUser = user
         cb()
       , (err) ->
