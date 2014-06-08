@@ -133,14 +133,14 @@ angular.module('patientNotifierApp')
       if form.$valid
         $scope.activation.id = $scope.userId
         $scope.activation.password = $scope.password
-        $scope.activation.$update({}, {
+        $scope.activation.$save({}, {
           id: $scope.userId,
           password: $scope.password
         })
           .then ->
+            $scope.$close($scope.activation)
             $location.path '/login'
           .catch (err) ->
-            err = err.data
             $scope.error = err.message
 
 

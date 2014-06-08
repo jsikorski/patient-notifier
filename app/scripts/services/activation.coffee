@@ -4,8 +4,8 @@ angular.module('patientNotifierApp')
   .factory 'Activation', ($resource) ->
     $resource '/api/users/:id/activate',
       id: '@id',
-        update:
-          method: 'PATCH'
+        save:
+          method: 'POST'
 
         get:
           method: 'GET'
