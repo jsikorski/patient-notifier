@@ -1,0 +1,17 @@
+div
+	h1 Ustawienia
+
+div
+	h3 Kanały powiadomień
+
+table.table.table-striped
+	thead
+		tr
+			th Nazwa
+			th Aktywny
+
+	tbody
+		tr(ng-repeat='channel in currentUser.notificationChannels')
+			td {{ channel.name }}
+			td
+				input(type='checkbox', ng-model='channel.isActive')

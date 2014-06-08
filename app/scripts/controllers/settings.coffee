@@ -1,17 +1,31 @@
 'use strict'
 
 angular.module('patientNotifierApp')
-  .controller 'SettingsCtrl', ($scope, User, Auth) ->
-    $scope.errors = {}
+	.controller 'SettingsCtrl', ($scope, User, Auth, $http, $notify) ->
+		$scope.errors = {}
 
-    $scope.changePassword = (form) ->
-      $scope.submitted = true
-      
-      if form.$valid
-        Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
-        .then(->
-          $scope.message = 'Password successfully changed.'
-        ).catch( ->
-          form.password.$setValidity 'mongoose', false
-          $scope.errors.other = 'Incorrect password'
-        )
+		$scope.changePassword = (form) ->
+			$scope.submitted = true
+			
+			if form.$valid
+				Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
+				.then ->
+					$scope.message = 'Password successfully changed.'
+				.catch ->
+					form.password.$setValidity 'mongoose', false
+					$scope.errors.other = 'Incorrect password'
+
+		console.log $scope.currentUser
+
+		$scope.$watch 'currentUser.notificationChannels', ((oldValue, newValue) ->
+			# console.log _.
+			console.log arguments
+			console.log $scope.currentUser.notificationChannels
+
+			$http(
+				method: 'PATCH'
+				url: "/api/users/#{$scope.currentUser._id}/notificationChannels",
+				data: { notificationChannels: $scope.currentUser.notificationChannels })
+				.success((channels) -> $scope.currentUser.notificationChannels = channels)
+				.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))
+			), true
