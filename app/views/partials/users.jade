@@ -16,6 +16,8 @@ table.table.table-striped
 			td {{ user.phoneNumber }}
 			td {{ user.role | role }}
 			td {{ user.active ? 'aktywny' : 'zablokowany' }}
+			td {{ user._id }}
+			td
 				span.glyphicon.glyphicon-pencil(ng-click='openEditUserModal()')
 			td(ng-switch='user.active')
 				span.glyphicon.glyphicon-ban-circle(ng-click='openBlockUserModal()', ng-switch-when='true')

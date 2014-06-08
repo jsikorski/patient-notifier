@@ -23,8 +23,6 @@ form.form(name='form', ng-submit='submit(form)', novalidate)
 										label(for='{{ key }}') {{ value.related.firstName }}
 									td
 										label(for='{{ key }}') {{ value.related.speciality | speciality }}
-									td
-										label(for='{{ key }}') {{ value.checked }}
 		div(ng-show="user.role==='user'")
 			table.table.table-striped
 				thead
