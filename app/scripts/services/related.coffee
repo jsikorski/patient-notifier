@@ -3,7 +3,7 @@
 angular.module("patientNotifierApp")
 .factory "Related", ($resource) ->
   $resource "/api/users/:id/related",
-    id: "@_id"
+    id: "@id"
   ,
     update:
       method: "PATCH"

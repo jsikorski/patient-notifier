@@ -28,7 +28,7 @@ angular.module('patientNotifierApp', [
           controller: 'RelatedCtrl'
       .when '/users/:id/activate',
           templateUrl: 'partials/setPassword'
-          controller: 'UserCtrl'
+          controller: 'ActivateUserCtrl'
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
@@ -56,4 +56,5 @@ angular.module('patientNotifierApp', [
     
     # Redirect to login if route requires auth and you're not logged in
     $rootScope.$on '$routeChangeStart', (event, next) ->
-      $location.path '/login'  if not Auth.isLoggedIn()
+      if not /\/users\/[a-z0-9]+\/activate/.test($location.path())
+        $location.path '/login'  if not Auth.isLoggedIn()

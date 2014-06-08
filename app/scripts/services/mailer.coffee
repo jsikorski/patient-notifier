@@ -11,5 +11,7 @@ angular.module('patientNotifierApp')
         subject: 'Account activation'
         text: ($location.absUrl()) + '/' + user._id + '/activate'
       }
-      Mailer.save({}, options
+      Mailer.save({}, options,
+        (err) ->
+          cb err
       ).$promise

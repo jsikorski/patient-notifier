@@ -72,7 +72,6 @@ angular.module('patientNotifierApp')
         .then ->
           $scope.$close($scope.user)
         .catch (err) ->
-          console.log(err)
           if err.data.code in [ 11000, 11001 ]
             $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
           else
@@ -90,7 +89,6 @@ angular.module('patientNotifierApp')
         .then ->
           $scope.$close($scope.user)
         .catch (err) ->
-          console.log(err)
           if err.data.lastErrorObject.code in [ 11000, 11001 ]
             $scope.error = "Użytkownik o podanym adresie e-mail jest już zarejestrowany w systemie."
           else
@@ -123,3 +121,28 @@ angular.module('patientNotifierApp')
       $scope.user.$update()
         .then ->
           $scope.$close($scope.user)
+
+
+angular.module('patientNotifierApp')
+  .controller 'ActivateUserCtrl', ($scope, Activation, $location) ->
+    $scope.userId = "#{$location.path()}".split('/')[2]
+    $scope.password = null
+    $scope.repeatPassword = null
+    $scope.activation = Activation.get({id: $scope.userId})
+
+    $scope.activate = (form) ->
+      $scope.submitted = true
+      if form.$valid
+        $scope.activation.id = $scope.userId
+        $scope.activation.password = $scope.password
+        $scope.activation.$update({}, {
+          id: $scope.userId,
+          password: $scope.password
+        })
+          .then ->
+            $location.path '/login'
+          .catch (err) ->
+            err = err.data
+            $scope.error = err.message
+
+
