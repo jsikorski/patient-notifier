@@ -2,15 +2,17 @@
   "name": "patientnotifier",
   "version": "0.0.0",
   "dependencies": {
+    "connect-mongo": "~0.4.0",
     "express": "~3.4.3",
+    "jade": "latest",
     "lodash": "~2.4.1",
     "mongoose": "~3.5.5",
     "mongoose-unique-validator": "~0.3.0",
-    "connect-mongo": "~0.4.0",
+    "mustache": "^0.8.1",
+    "nodemailer": "^0.6.5",
     "passport": "latest",
     "passport-local": "latest",
-    "jade": "latest",
-    "nodemailer": "^0.6.5"
+    "sprintf-js": "0.0.7"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

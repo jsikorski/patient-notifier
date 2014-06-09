@@ -1,0 +1,4 @@
+Zaktualizowano wizytę
+Nowa data: #{start} - #{end}
+Lekarz: #{doctor.firstName} #{doctor.lastName}
+Pacjent: #{patient.firstName} #{patient.lastName}
