@@ -1,0 +1,4 @@
+Przypomnienie o wizycie
+Data: {{start}} - {{end}}
+Lekarz: {{doctor.firstName}} {{doctor.lastName}}
+Pacjent: {{patient.firstName}} {{patient.lastName}}

@@ -2,10 +2,13 @@
   "name": "patientnotifier",
   "version": "0.0.0",
   "dependencies": {
+    "agenda": "^0.6.14",
+    "async": "^0.9.0",
     "connect-mongo": "~0.4.0",
     "express": "~3.4.3",
     "jade": "latest",
     "lodash": "~2.4.1",
+    "moment": "^2.6.0",
     "mongoose": "~3.5.5",
     "mongoose-unique-validator": "~0.3.0",
     "mustache": "^0.8.1",
