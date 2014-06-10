@@ -1,0 +1,107 @@
+doctype html
+// [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+// [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
+// [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
+// [if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    base(href="/")
+    title
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width")
+    // Place favicon.ico and apple-touch-icon.png in the root directory
+    <!-- build:css(app) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="styles/patients.css">
+    <!-- endbuild -->
+  body(ng-app="patientNotifierApp")
+    //[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+      <![endif]
+    //[if lt IE 9]>
+      <script src="bower_components/es5-shim/es5-shim.js"></script>
+      <script src="bower_components/json3/lib/json3.min.js"></script>
+      <![endif]
+
+    // Add your site or application content here
+    div(id='wrapper')
+        #navbar(ng-include='\'partials/navbar\'')
+        div(class="container" ng-view)
+        #footer(ng-include='\'partials/footer\'')
+
+    // Google Analytics: change UA-XXXXX-X to be your site's ID.
+    script.
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+
+    <!-- build:js(app) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/fullcalendar/fullcalendar.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+    <script src="bower_components/remarkable-bootstrap-growl/bootstrap-growl.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="bower_components/underscore.string/lib/underscore.string.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config/fullCalendar.js"></script>
+    <script src="scripts/controllers/visits.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/signup.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
+    <script src="scripts/controllers/related.js"></script>
+    <script src="scripts/services/confirm.js"></script>
+    <script src="scripts/services/notify.js"></script>
+    <script src="scripts/services/auth.js"></script>
+    <script src="scripts/services/session.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/patient.js"></script>
+    <script src="scripts/services/doctor.js"></script>
+    <script src="scripts/services/visit.js"></script>
+    <script src="scripts/services/visitEventsCollection.js"></script>
+    <script src="scripts/services/related.js"></script>
+    <script src="scripts/services/mailer.js"></script>
+    <script src="scripts/services/activation.js"></script>
+    <script src="scripts/directives/mongooseError.js"></script>
+    <script src="scripts/directives/pesel.js"></script>
+    <script src="scripts/directives/zipCode.js"></script>
+    <script src="scripts/directives/focusWhen.js"></script>
+    <script src="scripts/directives/latterThan.js"></script>
+    <script src="scripts/filters/zipCode.js"></script>
+    <script src="scripts/filters/address.js"></script>
+    <script src="scripts/filters/speciality.js"></script>
+    <script src="scripts/filters/role.js"></script>
+    <script src="scripts/controllers/patients.js"></script>
+    <script src="scripts/controllers/users.js"></script>
+    <script src="scripts/controllers/doctors.js"></script>
+    <!-- endbuild -->
+    
