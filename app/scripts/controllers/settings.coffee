@@ -32,5 +32,6 @@ angular.module('patientNotifierApp')
 				method: 'GET'
 				url: "/api/users/#{$scope.currentUser._id}/synchronize",
 				data: { })
-					.success(() -> )
+					.success((response) ->
+						console.log response)
 					.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))
