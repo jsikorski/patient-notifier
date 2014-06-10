@@ -36,10 +36,10 @@ html.no-js
       <![endif]
 
     // Add your site or application content here
-
-    #navbar(ng-include='\'partials/navbar\'')
-    div(class="container" ng-view)
-    #footer(ng-include='\'partials/footer\'')
+    div(id='wrapper')
+        #navbar(ng-include='\'partials/navbar\'')
+        div(class="container" ng-view)
+        #footer(ng-include='\'partials/footer\'')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.

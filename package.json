@@ -15,7 +15,8 @@
     "nodemailer": "^0.6.5",
     "passport": "latest",
     "passport-local": "latest",
-    "sprintf-js": "0.0.7"
+    "sprintf-js": "0.0.7",
+    "passport-google": "^0.3.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

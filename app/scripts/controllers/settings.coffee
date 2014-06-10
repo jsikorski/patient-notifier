@@ -25,3 +25,12 @@ angular.module('patientNotifierApp')
 					.success((channels) -> $scope.currentUser.notificationChannels = channels)
 					.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))
 			), true
+
+
+		$scope.synchWithGoogle = ->
+			$http(
+				method: 'GET'
+				url: "/api/users/#{$scope.currentUser._id}/synchronize",
+				data: { })
+					.success(() -> )
+					.error(-> $notify.error('Wystąpił nieznany błąd. Prosimy odświeżyć stronę.'))

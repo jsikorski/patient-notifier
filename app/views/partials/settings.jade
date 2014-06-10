@@ -15,3 +15,7 @@ table.table.table-striped
 			td {{ channel.name }}
 			td
 				input(type='checkbox', ng-model='channel.isActive')
+
+div
+	h3 Synchronizacja z kalendarzem Google
+	button.btn.btn-lg.btn-primary(ng-click='synchWithGoogle()') Synchronizuj
