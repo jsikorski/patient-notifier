@@ -1,3 +1,5 @@
+$footer-height: 60px
+
 body, html
 	margin: 0
 	padding: 0
@@ -6,13 +8,21 @@ body, html
 	#wrapper
 		min-height: 99%
 		position: relative
+		margin: 0 auto -$footer-height
 
 	.container
 		position: relative
 		padding-bottom: 60
 		overflow: auto
 
+		.calendar
+			margin-bottom: 30px
+
+	.push
+		height: $footer-height
+
 	#footer
+		height: $footer-height
 		margin-top: 60
 		bottom: 0
 		clear: both
