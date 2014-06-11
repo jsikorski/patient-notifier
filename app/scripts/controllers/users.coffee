@@ -17,7 +17,7 @@ angular.module('patientNotifierApp')
 
 
 angular.module('patientNotifierApp')
-	.controller 'UserCtrl', ($scope, User, $modal, $location) ->
+	.controller 'UserCtrl', ($scope, User, $modal, $location, $upload, $notify) ->
 		$scope.openEditUserModal = ->
 			modal = $modal.open
 				templateUrl: 'partials/user'
@@ -56,6 +56,12 @@ angular.module('patientNotifierApp')
 
 		$scope.openRelated = ->
 			$location.path ('/users/' + $scope.user._id + '/related')
+
+		$scope.onFileSelect = ($files) ->
+			$upload.upload(
+				url: '/api/users/' + $scope.user._id + '/attachments'
+				file: $files[0]
+				).success(-> $notify.success('Dodawanie pliku zakończone pomyślnie'))
 
 
 angular.module('patientNotifierApp')

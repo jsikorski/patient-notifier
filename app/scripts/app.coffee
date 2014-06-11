@@ -7,7 +7,8 @@ angular.module('patientNotifierApp', [
   'ngRoute',
   'ui.bootstrap',
   'ui.calendar',
-  'ui.bootstrap.datetimepicker'
+  'ui.bootstrap.datetimepicker',
+  'angularFileUpload'
 ])
   .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider
@@ -38,6 +39,9 @@ angular.module('patientNotifierApp', [
       .when '/settings',
         templateUrl: 'partials/settings'
         controller: 'SettingsCtrl'
+      .when '/files',
+        templateUrl: 'partials/files'
+        controller: 'FilesCtrl'
       .otherwise
         redirectTo: '/'
 

@@ -13,6 +13,7 @@ table.table.table-striped
 			th
 			th
 			th
+			th
 	tbody
 		tr(ng-repeat='user in users', ng-controller='UserCtrl')
 			td {{ user.name }}
@@ -28,3 +29,5 @@ table.table.table-striped
 			td
 				span.glyphicon.glyphicon-user(ng-click='openRelated()',
 					ng-show='user.role === "doctor" || user.role === "user"')
+			td
+				input(type='file' ng-file-select='onFileSelect($files)')
