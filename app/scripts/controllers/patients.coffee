@@ -14,6 +14,9 @@ angular.module('patientNotifierApp')
 			modal.result.then (patient) ->
 				$scope.patients.push(patient)
 
+		$scope.search = ->
+			$scope.patients = Patient.search(term: $scope.searchTerm)
+
 
 angular.module('patientNotifierApp')
 	.controller 'PatientCtrl', ($scope, Patient, $modal) ->

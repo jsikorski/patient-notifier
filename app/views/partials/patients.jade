@@ -1,5 +1,8 @@
 div
 	button.btn.btn-primary.pull-right(ng-click='openAddPatientModal()') Dodaj pacjenta
+	form.form.pull-right.search-form(ng-submit='search()')
+		input.form-control(type='text', placeholder='Szukaj', 'ng-model'='searchTerm')
+		button(type='submit', hidden='true')
 	h2 Pacjenci
 
 table.table.table-striped
