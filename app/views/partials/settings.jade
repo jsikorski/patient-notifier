@@ -16,6 +16,25 @@ table.table.table-striped
 			td
 				input(type='checkbox', ng-model='channel.isActive')
 
+
+div
+	h3 Zmiana hasła
+
+form.form(name='form', ng-submit='changePassword(form)', novalidate)
+	.form-group.has-error
+		p.help-block {{ changePasswordError }}
+
+	.form-group(ng-class='{ "has-error": submitted && form.oldPassword.$invalid }')
+		input.form-control(type='password', placeholder='Stare hasło', name='oldPassword', ng-model='user.oldPassword', required)
+		p.help-block(ng-show='submitted && form.oldPassword.$error.required') Stare hasło jest wymagane.
+
+	.form-group(ng-class='{ "has-error": submitted && form.newPassword.$invalid }')
+		input.form-control(type='password', placeholder='Nowe hasło', name='newPassword', ng-model='user.newPassword', required)
+		p.help-block(ng-show='submitted && form.newPassword.$error.required') Nowe hasło jest wymagane.
+
+	button.btn.btn-primary(type='submit') Zapisz
+
+
 div
 	h3 Synchronizacja z kalendarzem Google
 	button.btn.btn-lg.btn-primary(ng-click='synchWithGoogle()') Synchronizuj
