@@ -3,8 +3,7 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    mongoose = require('mongoose'),
-    cors = require('cors');;
+    mongoose = require('mongoose');
 
 /**
  * Main application file
@@ -42,8 +41,6 @@ require('./lib/config/express')(app);
 require('./lib/routes')(app);
 
 app.agenda = require('./lib/notifications/scheduler');
-
-app.use(cors());
 
 // Start server
 app.listen(config.port, function () {
