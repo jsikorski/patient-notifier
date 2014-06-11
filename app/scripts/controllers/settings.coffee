@@ -3,17 +3,21 @@
 angular.module('patientNotifierApp')
 	.controller 'SettingsCtrl', ($scope, User, Auth, $http, $notify) ->
 		$scope.errors = {}
+		$scope.user = {}
 
 		$scope.changePassword = (form) ->
+			$scope.changePasswordError = null
 			$scope.submitted = true
 			
 			if form.$valid
 				Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
 				.then ->
-					$scope.message = 'Password successfully changed.'
-				.catch ->
-					form.password.$setValidity 'mongoose', false
-					$scope.errors.other = 'Incorrect password'
+					$notify.success('Hasło zostało zmienione')
+					$scope.user.oldPassword = ''
+					$scope.user.newPassword = ''
+					$scope.submitted = false
+				.catch (err) ->
+					$scope.changePasswordError = 'Nieprawidłowe hasło'
 
 		$scope.$watch 'currentUser.notificationChannels', ((oldValue, newValue) ->
 			return if oldValue is newValue
