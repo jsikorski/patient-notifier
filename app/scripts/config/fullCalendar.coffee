@@ -17,8 +17,8 @@ angular.module('patientNotifierApp').value 'fullCalendarConfig',
 	timeFormat: 
 		agenda: 'H:mm{ - H:mm}'
 		'': 'HH:mm'
-	dayNames: [ 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela' ]
-	dayNamesShort: [ 'Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.', 'Niedz.' ]
+	dayNames: [ 'Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota' ]
+	dayNamesShort: [ 'Niedz.', 'Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.' ]
 	monthNames: months
 	monthNamesShort: months
 	allDaySlot: false
@@ -29,3 +29,4 @@ angular.module('patientNotifierApp').value 'fullCalendarConfig',
 	allDayDefault: false
 	defaultView: 'agendaWeek'
 	unselectAuto: false
+	firstDay: 1
