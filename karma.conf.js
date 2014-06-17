@@ -11,12 +11,18 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'app/bower_components/jquery/dist/jquery.js',
       'app/bower_components/angular/angular.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'app/bower_components/angular-ui-calendar/src/calendar.js',
+      'app/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
+      'app/bower_components/ng-file-upload/angular-file-upload.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/remarkable-bootstrap-growl/bootstrap-growl.js',
       'app/scripts/*.coffee',
       'app/scripts/**/*.coffee',
       'test/mock/**/*.coffee',

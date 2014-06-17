@@ -1,9 +1,9 @@
 "use strict"
 
-module = angular.module('patientNotifierApp')
+patientNotifier = angular.module('patientNotifierApp')
 
 
-module.service '$confirm', ($modal) ->
+patientNotifier.service '$confirm', ($modal) ->
 	(message, title = 'Potwierdzenie') ->
 		modal = $modal.open
 			templateUrl: 'partials/confirm'
@@ -15,6 +15,6 @@ module.service '$confirm', ($modal) ->
 		modal.result
 
 
-module.controller 'ConfirmCtrl', ($scope, message, title) ->
+patientNotifier.controller 'ConfirmCtrl', ($scope, message, title) ->
 	$scope.message = message
 	$scope.title = title

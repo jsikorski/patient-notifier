@@ -1,6 +1,6 @@
 'use strict'
 
-module = angular.module('patientNotifierApp')
+patientNotifier = angular.module('patientNotifierApp')
 
 cancelVisitMessage = 'Czy na pewno chcesz odwołać tę wizytę?'
 
@@ -19,7 +19,7 @@ errorHandler = ($scope) ->
 			$scope.error = 'Wystąpił nieznany błąd.'
 
 
-module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $notify, VisitEventsCollection) ->
+patientNotifier.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $notify, VisitEventsCollection) ->
 	events = new VisitEventsCollection()
 	$scope.eventsSource = [ events.models ]
 
@@ -80,7 +80,7 @@ module.controller 'VisitsCtrl', ($scope, fullCalendarConfig, $modal, $confirm, $
 		viewRender: (view) -> events.query(view.visStart, view.visEnd)
 
 	
-module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) ->
+patientNotifier.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) ->
 	$scope.title = 'Dodaj wizytę'
 	$scope.visit = new Visit({start, end})
 	$scope.patients = Patient.query()
@@ -95,7 +95,7 @@ module.controller 'AddVisitCtrl', ($scope, start, end, Visit, Patient, Doctor) -
 			.catch(errorHandler($scope))
 
 
-module.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor) ->
+patientNotifier.controller 'EditVisitCtrl', ($scope, editedVisit, Visit, Patient, Doctor) ->
 	$scope.title = 'Edytuj wizytę'
 	$scope.visit = new Visit(_.pick(editedVisit, Visit.defaultFields))
 	$scope.visit.patient = $scope.visit.patient._id
